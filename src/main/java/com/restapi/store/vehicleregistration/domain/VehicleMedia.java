@@ -21,7 +21,6 @@ public class VehicleMedia {
     private String fileName;
     private String fileType;
 
-    @Lob
     private byte[] data;
 
     @CreationTimestamp
