@@ -1,0 +1,191 @@
+scalar Upload
+
+type Query {
+    getVehicleById(id: ID!): VehicleResponse
+    getAllVehicles(page: Int = 0, size: Int = 10): [VehicleResponse]
+    searchVehicles(minPrice: Float, maxPrice: Float, brand: String, minYear: Int, maxYear: Int, condition: String, maxMileage: Int, page: Int = 0, size: Int = 10): [VehicleResponse]
+    getTotalAvailableVehicles(type: String): Int
+    getTransactionHistory(email: String!, page: Int = 0, size: Int = 10): [TransactionResponse]
+    getReviewsForVehicle(vehicleId: ID!, page: Int = 0, size: Int = 10): [ReviewResponse]
+}
+
+type Mutation {
+    registerVehicle(request: VehicleRegistrationInput!): VehicleResponse
+    updateVehicle(id: ID!, request: VehicleRegistrationInput!): VehicleResponse
+    deleteVehicle(id: ID!): Boolean
+    processTransaction(request: TransactionInput!): TransactionResponse
+    uploadMedia(file: Upload!): String
+    addReview(request: ReviewInput!): ReviewResponse
+    deleteReview(id: ID!): Boolean
+}
+
+type ReviewResponse {
+    id: ID!
+    vehicleId: ID!
+    authorName: String
+    authorProfileImageUrl: String
+    rating: Int!
+    comment: String
+    createdAt: String
+}
+
+input ReviewInput {
+    vehicleId: ID!
+    authorEmail: String!
+    rating: Int!
+    comment: String
+}
+
+type VehicleResponse {
+    id: ID!
+    type: String
+    status: String
+    vehicleCondition: String
+    brand: String
+    make: String
+    model: String
+    manufactureYear: Int
+    registrationNumber: String
+    vin: String
+    mileage: Int
+    bodyType: String
+    cost: Float
+    engineCapacity: Int
+    power: Int
+    fuelType: String
+    images: [String]
+    availablePaymentModes: [String]
+    features: VehicleFeaturesResponse
+    owner: UserResponse
+    createdAt: String
+}
+
+type VehicleFeaturesResponse {
+    hasAirbags: Boolean
+    hasAbs: Boolean
+    hasSunroof: Boolean
+    hasTouchscreen: Boolean
+    hasCruiseControl: Boolean
+    hasParkingSensors: Boolean
+    hasRearviewCamera: Boolean
+    hasAlloyWheels: Boolean
+    hasLeatherSeats: Boolean
+    hasKeylessEntry: Boolean
+    hasPushButtonStart: Boolean
+    hasClimateControl: Boolean
+    hasBluetooth: Boolean
+    hasNavigation: Boolean
+    hasHeatedSeats: Boolean
+    hasLedHeadlights: Boolean
+    hasPowerWindows: Boolean
+    hasPowerSteering: Boolean
+    hasTractionControl: Boolean
+    hasHillAssist: Boolean
+    transmissionType: String
+    seatingCapacity: Int
+    doors: Int
+}
+
+type UserResponse {
+    id: ID!
+    firstName: String
+    middleName: String
+    lastName: String
+    email: String
+    phoneNumber: String
+    paymentType: String
+    salaried: Boolean
+    communicationAddress: AddressResponse
+    shippingAddress: AddressResponse
+}
+
+type AddressResponse {
+    addressLine1: String
+    addressLine2: String
+    city: String
+    state: String
+    zip: String
+}
+
+type TransactionResponse {
+    id: ID!
+    vehicleId: ID!
+    vehicleRegistrationNumber: String
+    userEmail: String
+    transactionType: String
+    amount: Float
+    paymentMode: String
+    transactionDate: String
+}
+
+input VehicleRegistrationInput {
+    firstName: String
+    middleName: String
+    lastName: String
+    email: String!
+    phoneNumber: String
+    paymentType: String
+    salaried: Boolean
+    communicationAddress: AddressInput
+    shippingAddress: AddressInput
+    
+    vehicleType: String!
+    vehicleCondition: String
+    brand: String
+    make: String
+    model: String
+    manufactureYear: Int
+    registrationNumber: String!
+    vin: String
+    mileage: Int
+    bodyType: String
+    cost: Float
+    engineCapacity: Int
+    power: Int
+    fuelType: String
+    images: [String]
+    availablePaymentModes: [String]
+    features: VehicleFeaturesInput
+}
+
+input VehicleFeaturesInput {
+    hasAirbags: Boolean
+    hasAbs: Boolean
+    hasSunroof: Boolean
+    hasTouchscreen: Boolean
+    hasCruiseControl: Boolean
+    hasParkingSensors: Boolean
+    hasRearviewCamera: Boolean
+    hasAlloyWheels: Boolean
+    hasLeatherSeats: Boolean
+    hasKeylessEntry: Boolean
+    hasPushButtonStart: Boolean
+    hasClimateControl: Boolean
+    hasBluetooth: Boolean
+    hasNavigation: Boolean
+    hasHeatedSeats: Boolean
+    hasLedHeadlights: Boolean
+    hasPowerWindows: Boolean
+    hasPowerSteering: Boolean
+    hasTractionControl: Boolean
+    hasHillAssist: Boolean
+    transmissionType: String
+    seatingCapacity: Int
+    doors: Int
+}
+
+input AddressInput {
+    addressLine1: String
+    addressLine2: String
+    city: String
+    state: String
+    zip: String
+}
+
+input TransactionInput {
+    vehicleId: ID!
+    userEmail: String!
+    transactionType: String!
+    amount: Float!
+    paymentMode: String!
+}

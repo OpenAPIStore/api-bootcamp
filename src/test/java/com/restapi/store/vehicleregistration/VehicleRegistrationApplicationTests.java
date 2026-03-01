@@ -1,10 +1,10 @@
-package com.restapi.store.bootcamp;
+package com.restapi.store.vehicleregistration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BootcampApplicationTests {
+class VehicleRegistrationApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,13 +1,13 @@
-package com.restapi.store.bootcamp;
+package com.restapi.store.vehicleregistration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BootcampApplication {
+public class VehicleRegistrationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BootcampApplication.class, args);
+		SpringApplication.run(VehicleRegistrationApplication.class, args);
 	}
 
 }
